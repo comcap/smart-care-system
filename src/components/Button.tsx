@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   PressableProps,
 } from 'react-native'
+import { colors } from '@/theme'
 import { styles } from './Button.styles'
 
 interface ButtonProps extends Omit<PressableProps, 'style'> {
@@ -37,7 +38,7 @@ export const Button = ({
       {...rest}
     >
       {loading ? (
-        <ActivityIndicator testID={`${testID}--loading`} color="#FFFFFF" />
+        <ActivityIndicator testID={`${testID}--loading`} color={colors.white} />
       ) : (
         <Text style={styles.label}>{label}</Text>
       )}

@@ -1,5 +1,5 @@
 import { StyleSheet, ViewStyle } from 'react-native'
-import { colors, spacing, radius, typography } from '@/theme'
+import { colors, spacing, radius, typography, iconSize } from '@/theme'
 
 const circleBadge: ViewStyle = {
   alignItems: 'center',
@@ -28,10 +28,10 @@ export const styles = StyleSheet.create({
   },
   headerIconBadge: {
     ...circleBadge,
-    width: 36,
-    height: 36,
+    width: iconSize.sm,
+    height: iconSize.sm,
     borderRadius: radius.md,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: colors.overlayOnDark,
   },
   headerIconGlyph: {
     ...typography.bodyBold,
@@ -58,8 +58,8 @@ export const styles = StyleSheet.create({
   },
   iconButton: {
     ...circleBadge,
-    width: 40,
-    height: 40,
+    width: iconSize.md,
+    height: iconSize.md,
     borderRadius: radius.xl,
     backgroundColor: colors.white,
     marginLeft: spacing.sm,
@@ -104,8 +104,8 @@ export const styles = StyleSheet.create({
   },
   emptyIconBadge: {
     ...circleBadge,
-    width: 64,
-    height: 64,
+    width: iconSize.xl,
+    height: iconSize.xl,
     borderRadius: radius.xl,
     backgroundColor: colors.surface,
     marginBottom: spacing.sm + 4,

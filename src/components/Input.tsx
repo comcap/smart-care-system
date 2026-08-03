@@ -7,6 +7,7 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native'
+import { colors } from '@/theme'
 import { styles } from './Input.styles'
 
 interface InputProps extends Omit<TextInputProps, 'style'> {
@@ -36,7 +37,7 @@ export const Input = ({
         testID={testID}
         accessibilityLabel={label || rest.placeholder}
         accessibilityLabelledBy={labelId}
-        placeholderTextColor="#9CA3AF"
+        placeholderTextColor={colors.placeholder}
         style={[styles.input, error && styles.inputError, inputStyle]}
         {...rest}
       />

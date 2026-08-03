@@ -17,3 +17,14 @@ export const radius = {
   xxl: 24,
   full: 9999,
 } as const
+
+// Fixed square sizes for circular icon badges (header logos, empty-state
+// glyphs, modal icons). Not a linear scale — each size maps to a specific
+// badge context, listed smallest to largest.
+export const iconSize = {
+  sm: 36,
+  md: 40,
+  lg: 56,
+  xl: 64,
+  xxl: 72,
+} as const

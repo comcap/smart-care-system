@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { colors, spacing, radius, typography } from '@/theme'
+import { colors, spacing, radius, typography, iconSize } from '@/theme'
 
 export const styles = StyleSheet.create({
   container: {
@@ -16,10 +16,10 @@ export const styles = StyleSheet.create({
     gap: spacing.sm + 4,
   },
   backButton: {
-    width: 36,
-    height: 36,
+    width: iconSize.sm,
+    height: iconSize.sm,
     borderRadius: radius.md,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: colors.overlayOnDark,
     alignItems: 'center',
     justifyContent: 'center',
   },

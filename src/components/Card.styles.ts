@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     borderRadius: radius.xl,
     padding: spacing.md,
     marginBottom: spacing.sm + 2,
-    shadowColor: '#000000',
+    shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.04,
     shadowRadius: 3,

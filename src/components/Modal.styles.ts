@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { colors, spacing, radius, typography } from '../theme'
+import { colors, spacing, radius, typography, iconSize } from '../theme'
 
 export const styles = StyleSheet.create({
   overlay: {
@@ -18,8 +18,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconBadge: {
-    width: 56,
-    height: 56,
+    width: iconSize.lg,
+    height: iconSize.lg,
     borderRadius: radius.xl,
     backgroundColor: colors.errorSurface,
     alignItems: 'center',

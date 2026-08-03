@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { colors, spacing, radius, typography } from '@/theme'
+import { colors, spacing, radius, typography, iconSize } from '@/theme'
 
 export const styles = StyleSheet.create({
   container: {
@@ -14,10 +14,10 @@ export const styles = StyleSheet.create({
     paddingBottom: spacing.xl,
   },
   heroIconBadge: {
-    width: 72,
-    height: 72,
+    width: iconSize.xxl,
+    height: iconSize.xxl,
     borderRadius: radius.xl,
-    backgroundColor: 'rgba(255,255,255,0.15)',
+    backgroundColor: colors.overlayOnDarkSubtle,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.md,

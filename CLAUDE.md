@@ -65,6 +65,7 @@ src/
 - ปุ่ม submit ใช้ `formState.isValid` จาก react-hook-form ควบคุม disabled state ไม่เขียน manual validation ซ้ำ
 - Search ใน Main page: ไม่ filter list ในหน้า ต้อง navigate ไป Request Detail หรือโชว์ error เท่านั้น
 - Test file คู่กับไฟล์จริงใน `__tests__/` หรือ `.test.ts` ข้างไฟล์ — เน้น cover schema validation + reducer logic
+- **ห้าม hardcode ค่าดิบใน `.styles.ts`/`.tsx`** — สี (`#RRGGBB`, `rgba(...)`), ระยะห่าง, ขนาด icon/badge ต้องมาจาก `src/theme/` (`colors`, `spacing`, `radius`, `typography`, `iconSize`) เท่านั้น ถ้าค่าที่ต้องการยังไม่มี token รองรับ ให้เพิ่ม token ใหม่ใน `src/theme/` ก่อน (ห้ามเขียนเลข/hex ทับไปตรงๆ) เพื่อกันไม่ให้ค่าเดียวกันหลุดไปเขียนซ้ำคนละที่แล้ว drift กัน (ดูตัวอย่างที่เคยเกิด: `colors.placeholder` กับ hardcoded `#9CA3AF` ใน `Input.tsx` เป็นคนละสีกันทั้งที่ควรเป็นค่าเดียวกัน)
 
 ## Commands
 

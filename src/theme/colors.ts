@@ -18,7 +18,10 @@ export const colors = {
   errorSurface: '#FEE2E2',
   success: '#16A34A',
   white: '#FFFFFF',
+  shadow: '#000000',
   overlay: 'rgba(15, 23, 42, 0.4)',
+  overlayOnDark: 'rgba(255, 255, 255, 0.2)',
+  overlayOnDarkSubtle: 'rgba(255, 255, 255, 0.15)',
 } as const
 
 export type ColorToken = keyof typeof colors
