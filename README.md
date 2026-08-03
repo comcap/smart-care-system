@@ -4,6 +4,8 @@ React Native (CLI) application for reporting internal office issues and requesti
 
 **Screens:** Login → Main → Add Request → Request Detail
 
+**Wireframe:** [Figma — Smart Care System](https://www.figma.com/design/zkuQlprhLXhqmrheS6StAK/Smart-Care-System)
+
 Full specification and implementation decisions are documented in [PLAN.md](./PLAN.md) and [CLAUDE.md](./CLAUDE.md).
 
 ## Tech Stack
