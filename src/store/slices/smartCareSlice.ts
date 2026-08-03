@@ -28,6 +28,7 @@ const smartCareSlice = createSlice({
     requestAdded: {
       reducer(state, action: PayloadAction<SmartCare>) {
         state.items.unshift(action.payload)
+        state.status = 'succeeded'
       },
       prepare(input: { title: string; description: string }) {
         return {

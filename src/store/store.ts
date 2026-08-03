@@ -11,11 +11,11 @@ import {
 } from 'redux-persist'
 import authReducer from './slices/authSlice'
 import smartCareReducer from './slices/smartCareSlice'
-import { rootPersistConfig } from './persistConfig'
+import { rootPersistConfig, smartCarePersistConfig } from './persistConfig'
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  smartCare: smartCareReducer,
+  smartCare: persistReducer(smartCarePersistConfig, smartCareReducer),
 })
 
 export type RootState = ReturnType<typeof rootReducer>
