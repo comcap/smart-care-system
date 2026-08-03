@@ -1,43 +1,23 @@
 import { loginSchema } from '../login.schema'
 
 describe('loginSchema', () => {
-  it('should pass when identifier is a valid 13-digit citizen ID', () => {
-    const result = loginSchema.safeParse({ identifier: '1234567890123' })
-    expect(result.success).toBe(true)
-  })
-
-  it('should pass when identifier is a valid 10-digit phone number', () => {
-    const result = loginSchema.safeParse({ identifier: '0812345678' })
-    expect(result.success).toBe(true)
-  })
-
-  it('should fail when identifier is empty', () => {
-    const result = loginSchema.safeParse({ identifier: '' })
-    expect(result.success).toBe(false)
-  })
-
-  it('should fail when identifier has 12 digits (one short of citizen ID)', () => {
-    const result = loginSchema.safeParse({ identifier: '123456789012' })
-    expect(result.success).toBe(false)
-  })
-
-  it('should fail when identifier has 14 digits (one over citizen ID)', () => {
-    const result = loginSchema.safeParse({ identifier: '12345678901234' })
-    expect(result.success).toBe(false)
-  })
-
-  it('should fail when identifier has 9 digits (one short of phone)', () => {
-    const result = loginSchema.safeParse({ identifier: '081234567' })
-    expect(result.success).toBe(false)
-  })
-
-  it('should fail when identifier has 11 digits (one over phone, not a valid citizen ID length)', () => {
-    const result = loginSchema.safeParse({ identifier: '08123456789' })
-    expect(result.success).toBe(false)
-  })
-
-  it('should fail when identifier contains non-digit characters', () => {
-    const result = loginSchema.safeParse({ identifier: '081234567a' })
-    expect(result.success).toBe(false)
+  it.each([
+    ['13-digit citizen ID with a valid checksum', '1101234567897', true],
+    ['13 digits but an invalid checksum', '1234567890123', false],
+    ['valid 10-digit mobile phone number', '0812345678', true],
+    ['10-digit number with a non-mobile prefix', '0212345678', false],
+    ['empty string', '', false],
+    ['12 digits (one short of citizen ID)', '123456789012', false],
+    ['14 digits (one over citizen ID)', '12345678901234', false],
+    ['9 digits (one short of phone)', '081234567', false],
+    [
+      '11 digits (one over phone, not a valid citizen ID length)',
+      '08123456789',
+      false,
+    ],
+    ['non-digit characters', '081234567a', false],
+  ] as const)('%s -> success = %s', (_description, identifier, expected) => {
+    const result = loginSchema.safeParse({ identifier })
+    expect(result.success).toBe(expected)
   })
 })
