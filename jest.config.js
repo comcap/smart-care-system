@@ -4,4 +4,4 @@ module.exports = {
   transformIgnorePatterns: [
     'node_modules/(?!((jest-)?react-native|@react-native(-community)?|@react-native-async-storage|react-native-.*|@react-navigation|react-redux|redux-persist|@reduxjs|immer)/)',
   ],
-};
+}
