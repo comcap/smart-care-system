@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal as RNModal, View, Text } from 'react-native'
+import { Modal as RNModal, View, Text, Pressable } from 'react-native'
 import { Button } from './Button'
 import { styles } from './Modal.styles'
 
@@ -11,6 +11,9 @@ interface ModalProps {
   onConfirm: () => void
   testID: string
   confirmTestID?: string
+  cancelLabel?: string
+  onCancel?: () => void
+  cancelTestID?: string
 }
 
 export const Modal = ({
@@ -21,6 +24,9 @@ export const Modal = ({
   onConfirm,
   testID,
   confirmTestID = `${testID}--confirm`,
+  cancelLabel = 'ยกเลิก',
+  onCancel,
+  cancelTestID = `${testID}--cancel`,
 }: ModalProps) => {
   return (
     <RNModal
@@ -29,7 +35,7 @@ export const Modal = ({
       transparent
       animationType="fade"
       accessibilityViewIsModal
-      onRequestClose={onConfirm}
+      onRequestClose={onCancel ?? onConfirm}
     >
       <View style={styles.overlay}>
         <View style={styles.content}>
@@ -43,6 +49,17 @@ export const Modal = ({
             label={confirmLabel}
             onPress={onConfirm}
           />
+          {onCancel ? (
+            <Pressable
+              testID={cancelTestID}
+              accessibilityRole="button"
+              accessibilityLabel={cancelLabel}
+              style={styles.cancelButton}
+              onPress={onCancel}
+            >
+              <Text style={styles.cancelLabel}>{cancelLabel}</Text>
+            </Pressable>
+          ) : null}
         </View>
       </View>
     </RNModal>

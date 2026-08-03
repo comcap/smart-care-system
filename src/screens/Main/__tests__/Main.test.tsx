@@ -16,14 +16,17 @@ const sample: SmartCare = {
 
 async function renderMain(items: SmartCare[] = []) {
   const store = createTestStore({ smartCare: { items, status: 'succeeded' } })
-  const navigation = createMockNavigation<'Main'>({ navigate: jest.fn() })
+  const navigation = createMockNavigation<'Main'>({
+    navigate: jest.fn(),
+    reset: jest.fn(),
+  })
   const route = createMockRoute('Main', undefined)
   const utils = await render(
     <Provider store={store}>
       <Main navigation={navigation} route={route} />
     </Provider>,
   )
-  return { ...utils, navigation }
+  return { ...utils, navigation, store }
 }
 
 describe('Main screen', () => {
@@ -104,5 +107,60 @@ describe('Main screen', () => {
         }),
       ).toBeNull()
     })
+  })
+
+  it('opens the logout modal when the menu button is pressed', async () => {
+    const { getByTestId } = await renderMain([])
+    fireEvent.press(getByTestId('main__btn--menu'))
+
+    await waitFor(() => {
+      expect(
+        getByTestId('main__modal--logout', { includeHiddenElements: true })
+          .props.visible,
+      ).toBe(true)
+    })
+  })
+
+  it('closes the logout modal without logging out when cancel is pressed', async () => {
+    const { getByTestId, queryByTestId, store } = await renderMain([])
+    fireEvent.press(getByTestId('main__btn--menu'))
+
+    await waitFor(() => {
+      expect(
+        getByTestId('main__modal--logout', { includeHiddenElements: true })
+          .props.visible,
+      ).toBe(true)
+    })
+
+    fireEvent.press(getByTestId('main__modal-btn--cancel-logout'))
+
+    await waitFor(() => {
+      expect(
+        queryByTestId('main__modal--logout', {
+          includeHiddenElements: true,
+        }),
+      ).toBeNull()
+    })
+    expect(store.getState().auth.isAuthenticated).toBe(false)
+  })
+
+  it('logs out and resets navigation to Login when logout is confirmed', async () => {
+    const { getByTestId, navigation, store } = await renderMain([])
+    fireEvent.press(getByTestId('main__btn--menu'))
+
+    await waitFor(() => {
+      expect(
+        getByTestId('main__modal--logout', { includeHiddenElements: true })
+          .props.visible,
+      ).toBe(true)
+    })
+
+    fireEvent.press(getByTestId('main__modal-btn--confirm-logout'))
+
+    expect(navigation.reset).toHaveBeenCalledWith({
+      index: 0,
+      routes: [{ name: 'Login' }],
+    })
+    expect(store.getState().auth.isAuthenticated).toBe(false)
   })
 })

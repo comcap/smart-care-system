@@ -42,4 +42,12 @@ export const styles = StyleSheet.create({
     marginBottom: spacing.lg,
     textAlign: 'center',
   },
+  cancelButton: {
+    marginTop: spacing.sm,
+    paddingVertical: spacing.xs,
+  },
+  cancelLabel: {
+    ...typography.bodyBold,
+    color: colors.textMuted,
+  },
 })

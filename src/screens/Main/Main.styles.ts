@@ -1,5 +1,10 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 import { colors, spacing, radius, typography } from '@/theme'
+
+const circleBadge: ViewStyle = {
+  alignItems: 'center',
+  justifyContent: 'center',
+}
 
 export const styles = StyleSheet.create({
   container: {
@@ -22,12 +27,11 @@ export const styles = StyleSheet.create({
     flexShrink: 1,
   },
   headerIconBadge: {
+    ...circleBadge,
     width: 36,
     height: 36,
     borderRadius: radius.md,
     backgroundColor: 'rgba(255,255,255,0.2)',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   headerIconGlyph: {
     ...typography.bodyBold,
@@ -41,6 +45,7 @@ export const styles = StyleSheet.create({
     ...typography.caption,
     color: colors.secondary,
   },
+  headerActions: { flexDirection: 'row', alignItems: 'center' },
   addButton: {
     backgroundColor: colors.white,
     paddingHorizontal: spacing.sm + 4,
@@ -48,6 +53,18 @@ export const styles = StyleSheet.create({
     borderRadius: radius.xl,
   },
   addButtonLabel: {
+    ...typography.bodyBold,
+    color: colors.primary,
+  },
+  iconButton: {
+    ...circleBadge,
+    width: 40,
+    height: 40,
+    borderRadius: radius.xl,
+    backgroundColor: colors.white,
+    marginLeft: spacing.sm,
+  },
+  iconButtonGlyph: {
     ...typography.bodyBold,
     color: colors.primary,
   },
@@ -86,12 +103,11 @@ export const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
   },
   emptyIconBadge: {
+    ...circleBadge,
     width: 64,
     height: 64,
     borderRadius: radius.xl,
     backgroundColor: colors.surface,
-    alignItems: 'center',
-    justifyContent: 'center',
     marginBottom: spacing.sm + 4,
   },
   emptyIconGlyph: {
