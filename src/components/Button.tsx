@@ -1,15 +1,26 @@
-import React from 'react';
-import { Pressable, Text, ActivityIndicator, PressableProps } from 'react-native';
-import { styles } from './Button.styles';
+import React from 'react'
+import {
+  Pressable,
+  Text,
+  ActivityIndicator,
+  PressableProps,
+} from 'react-native'
+import { styles } from './Button.styles'
 
 interface ButtonProps extends Omit<PressableProps, 'style'> {
-  label: string;
-  loading?: boolean;
-  testID: string;
+  label: string
+  loading?: boolean
+  testID: string
 }
 
-export function Button({ label, loading = false, disabled, testID, ...rest }: ButtonProps) {
-  const isDisabled = disabled || loading;
+export const Button = ({
+  label,
+  loading = false,
+  disabled,
+  testID,
+  ...rest
+}: ButtonProps) => {
+  const isDisabled = disabled || loading
 
   return (
     <Pressable
@@ -23,12 +34,13 @@ export function Button({ label, loading = false, disabled, testID, ...rest }: Bu
         isDisabled && styles.disabled,
         pressed && !isDisabled && styles.pressed,
       ]}
-      {...rest}>
+      {...rest}
+    >
       {loading ? (
-        <ActivityIndicator testID={`${testID}-loading`} color="#FFFFFF" />
+        <ActivityIndicator testID={`${testID}--loading`} color="#FFFFFF" />
       ) : (
         <Text style={styles.label}>{label}</Text>
       )}
     </Pressable>
-  );
+  )
 }

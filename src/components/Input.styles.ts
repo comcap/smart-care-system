@@ -1,24 +1,26 @@
-import { StyleSheet } from 'react-native';
-import { colors, spacing, radius, typography } from '../theme';
+import { StyleSheet } from 'react-native'
+import { colors, spacing, radius, typography } from '../theme'
 
 export const styles = StyleSheet.create({
   container: {
     marginBottom: spacing.md,
   },
   label: {
-    ...typography.caption,
+    ...typography.label,
     color: colors.textMuted,
-    marginBottom: spacing.xs,
+    textTransform: 'uppercase',
+    marginBottom: spacing.sm,
   },
   input: {
     ...typography.body,
     color: colors.text,
+    backgroundColor: colors.inputBackground,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: radius.sm,
+    borderRadius: radius.xl,
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    minHeight: 44,
+    paddingVertical: spacing.sm + 4,
+    minHeight: 48,
   },
   inputError: {
     borderColor: colors.error,
@@ -28,4 +30,4 @@ export const styles = StyleSheet.create({
     color: colors.error,
     marginTop: spacing.xs,
   },
-});
+})

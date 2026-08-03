@@ -5,13 +5,15 @@ export const spacing = {
   lg: 24,
   xl: 32,
   xxl: 48,
-} as const;
+} as const
 
-export type SpacingToken = keyof typeof spacing;
+export type SpacingToken = keyof typeof spacing
 
 export const radius = {
-  sm: 6,
-  md: 12,
-  lg: 16,
+  sm: 8,
+  md: 10,
+  lg: 12,
+  xl: 16,
+  xxl: 24,
   full: 9999,
-} as const;
+} as const

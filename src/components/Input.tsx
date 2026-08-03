@@ -1,32 +1,54 @@
-import React from 'react';
-import { View, Text, TextInput, TextInputProps } from 'react-native';
-import { styles } from './Input.styles';
+import React from 'react'
+import {
+  View,
+  Text,
+  TextInput,
+  TextInputProps,
+  StyleProp,
+  TextStyle,
+} from 'react-native'
+import { styles } from './Input.styles'
 
 interface InputProps extends Omit<TextInputProps, 'style'> {
-  label: string;
-  error?: string;
-  testID: string;
+  label?: string
+  error?: string
+  testID: string
+  inputStyle?: StyleProp<TextStyle>
 }
 
-export function Input({ label, error, testID, ...rest }: InputProps) {
+export const Input = ({
+  label,
+  error,
+  testID,
+  inputStyle,
+  ...rest
+}: InputProps) => {
+  const labelId = label ? `${testID}--label` : undefined
+
   return (
     <View style={styles.container}>
-      <Text style={styles.label} nativeID={`${testID}-label`}>
-        {label}
-      </Text>
+      {label ? (
+        <Text style={styles.label} nativeID={labelId}>
+          {label}
+        </Text>
+      ) : null}
       <TextInput
         testID={testID}
-        accessibilityLabel={label}
-        accessibilityLabelledBy={`${testID}-label`}
+        accessibilityLabel={label || rest.placeholder}
+        accessibilityLabelledBy={labelId}
         placeholderTextColor="#9CA3AF"
-        style={[styles.input, error && styles.inputError]}
+        style={[styles.input, error && styles.inputError, inputStyle]}
         {...rest}
       />
       {error ? (
-        <Text testID={`${testID}-error`} style={styles.errorText} accessibilityRole="alert">
+        <Text
+          testID={`${testID}--error`}
+          style={styles.errorText}
+          accessibilityRole="alert"
+        >
           {error}
         </Text>
       ) : null}
     </View>
-  );
+  )
 }

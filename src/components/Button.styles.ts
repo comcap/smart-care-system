@@ -1,15 +1,15 @@
-import { StyleSheet } from 'react-native';
-import { colors, spacing, radius, typography } from '../theme';
+import { StyleSheet } from 'react-native'
+import { colors, spacing, radius, typography } from '../theme'
 
 export const styles = StyleSheet.create({
   base: {
     backgroundColor: colors.primary,
-    paddingVertical: spacing.sm + 4,
+    paddingVertical: spacing.sm + 6,
     paddingHorizontal: spacing.lg,
-    borderRadius: radius.md,
+    borderRadius: radius.xl,
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 44,
+    minHeight: 48,
   },
   pressed: {
     backgroundColor: colors.primaryDark,
@@ -21,4 +21,4 @@ export const styles = StyleSheet.create({
     ...typography.button,
     color: colors.white,
   },
-});
+})

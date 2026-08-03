@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { colors, spacing, radius, typography } from '../theme';
+import { StyleSheet } from 'react-native'
+import { colors, spacing, radius, typography } from '../theme'
 
 export const styles = StyleSheet.create({
   overlay: {
@@ -10,20 +10,36 @@ export const styles = StyleSheet.create({
     padding: spacing.lg,
   },
   content: {
-    backgroundColor: colors.background,
-    borderRadius: radius.lg,
+    backgroundColor: colors.card,
+    borderRadius: radius.xxl,
     padding: spacing.lg,
     width: '100%',
-    maxWidth: 360,
+    maxWidth: 340,
+    alignItems: 'center',
+  },
+  iconBadge: {
+    width: 56,
+    height: 56,
+    borderRadius: radius.xl,
+    backgroundColor: colors.errorSurface,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.md,
+  },
+  iconBadgeText: {
+    ...typography.h3,
+    color: colors.error,
   },
   title: {
-    ...typography.h2,
+    ...typography.h3,
     color: colors.text,
-    marginBottom: spacing.sm,
+    marginBottom: spacing.xs,
+    textAlign: 'center',
   },
   message: {
     ...typography.body,
     color: colors.textMuted,
     marginBottom: spacing.lg,
+    textAlign: 'center',
   },
-});
+})
