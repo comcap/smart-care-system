@@ -1,6 +1,6 @@
 export interface SmartCare {
-  id: string;
-  title: string;
-  description: string;
-  createdAt: string;
+  id: string
+  title: string
+  description: string
+  createdAt: string
 }
