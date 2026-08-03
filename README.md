@@ -1,63 +1,104 @@
 # Smart Care System
 
-React Native app สำหรับแจ้งปัญหาและขอความช่วยเหลือภายในสำนักงาน — 4 หน้า: Login → Main → Add Request → Request Detail
+React Native (CLI) application for reporting internal office issues and requesting support. Built as a technical assessment submission.
 
-รายละเอียดสเปค/decisions ทั้งหมดอยู่ใน [PLAN.md](./PLAN.md) และ [CLAUDE.md](./CLAUDE.md)
+**Screens:** Login → Main → Add Request → Request Detail
+
+Full specification and implementation decisions are documented in [PLAN.md](./PLAN.md) and [CLAUDE.md](./CLAUDE.md).
 
 ## Tech Stack
 
-React Native (CLI) + TypeScript · react-navigation (Stack) · react-hook-form + Zod · Redux Toolkit + redux-persist · Jest + React Native Testing Library · pnpm · ESLint + Prettier
+| Layer           | Choice                                            |
+| --------------- | -------------------------------------------------- |
+| Framework       | React Native (CLI) — no Expo Router                |
+| Language        | TypeScript (strict mode)                           |
+| Navigation      | react-navigation (Native Stack)                    |
+| Forms           | react-hook-form + Zod (`@hookform/resolvers/zod`)  |
+| State           | Redux Toolkit                                      |
+| Persistence     | redux-persist                                      |
+| Testing         | Jest + React Native Testing Library                |
+| Package manager | pnpm                                               |
+| Tooling         | ESLint + Prettier                                  |
 
-## Setup
+## Getting Started
+
+### Prerequisites
+
+- Node.js, pnpm
+- iOS: Xcode + CocoaPods
+- Android: Android Studio + SDK
+
+### Install
 
 ```bash
 pnpm install
 ```
 
-> โปรเจกต์นี้ต้อง pin `node-linker=hoisted` ใน `.npmrc` (มีมาให้แล้ว) — React Native's Metro bundler และ Jest ยังไม่รองรับ pnpm's default symlinked `node_modules/.pnpm` layout ได้เต็มที่
+> This project pins `node-linker=hoisted` in `.npmrc` (already included). React Native's Metro bundler and Jest do not yet fully support pnpm's default symlinked `node_modules/.pnpm` layout.
 
-รัน:
+### Run
 
 ```bash
 pnpm start        # Metro bundler
-pnpm android       # ต้องมี Android emulator/device + Android SDK
-pnpm ios           # ต้องมี Xcode + CocoaPods (bundle install && bundle exec pod install ใน ios/ ครั้งแรก)
+pnpm android       # requires an Android emulator/device + Android SDK
+pnpm ios           # requires Xcode + CocoaPods (bundle install && bundle exec pod install in ios/ on first run)
 ```
 
-ทดสอบ/ตรวจสอบ:
+### Test & Lint
 
 ```bash
 pnpm test
 pnpm lint
 ```
 
-## Decisions ที่ตัดสินใจเอง (ไม่ตรงกับสเปคเป๊ะ)
+## Project Structure
 
-สเปค/wireframe เดิมไม่ได้ระบุ 2 จุดนี้ชัดเจน — ตัดสินใจเองระหว่าง implement ตาม [PLAN.md](./PLAN.md#5-open-decisions-already-made-ไม่ตรงกับสเปคเป๊ะ-แต่-confirm-แล้วโดยผู้สมัคร):
+```
+src/
+  screens/          # Login, Main, AddRequest, RequestDetail
+  components/       # Button, Input, Card, Modal
+  navigation/        # RootStackParamList + Stack Navigator
+  store/
+    slices/          # authSlice, smartCareSlice
+    store.ts
+    persistConfig.ts
+  schemas/          # Zod validation schemas
+  theme/            # colors, spacing, typography tokens
+  utils/            # id generator, date formatter
+  types/
+```
 
-1. **Add Request submit สำเร็จ → navigate กลับ Main** (ไม่ใช่ไป Request Detail ของรายการที่เพิ่งสร้าง) เพราะสเปคไม่ได้ระบุปลายทางหลัง submit ชัดเจน และ Main เป็นจุดที่เห็นรายการใหม่ในลิสต์ได้ทันที
-2. **Search ใน Main ไม่เจอ → แสดง modal** (ไม่ใช่ inline error text และไม่ filter list ในหน้า) เพื่อแยกความชัดเจนระหว่าง "ค้นหาไม่เจอ" กับ empty state ของลิสต์เอง
+## Design Decisions
 
-Copy ใน wireframe เดิมมีจุดพิมพ์ผิด ("กรอง..." ควรเป็น "กรอก...") แก้ไขตรงๆ ใน code โดยไม่ได้ย้อนไปแก้ Figma
+The original wireframe/spec left two flows unspecified; the following decisions were made during implementation and are also detailed in [PLAN.md](./PLAN.md#5-open-decisions-already-made-ไม่ตรงกับสเปคเป๊ะ-แต่-confirm-แล้วโดยผู้สมัคร):
 
-## Known limitations
+1. **Add Request submits back to Main**, not to the newly created item's Request Detail — the spec did not define a destination, and Main surfaces the new item in the list immediately.
+2. **A failed search on Main shows a modal**, rather than inline error text or filtering the list — this keeps "not found" distinct from the list's own empty state.
 
-- ยังไม่ได้รันบน simulator/emulator จริง (ไม่มี Xcode/Android SDK ในสภาพแวดล้อมที่ build โค้ดนี้) — ตรวจสอบผ่าน `pnpm lint` + `pnpm test` (typecheck ผ่าน, 51 tests ผ่านทั้งหมด) เท่านั้น ก่อน merge ควรรันจริงบนอุปกรณ์อย่างน้อยหนึ่งครั้ง
-- Design tokens (`src/theme/`) เป็นค่าตั้งต้นที่กำหนดเองใน code ไม่ได้ sync กับ Figma variables จริง (ตามที่ระบุใน [PLAN.md](./PLAN.md#7-figma) ว่าข้ามขั้นตอนนี้เพื่อประหยัดเวลา)
+The wireframe copy also contained a typo ("กรอง..." instead of "กรอก..."), corrected directly in code rather than in Figma.
+
+## testID Convention
+
+BEM-inspired format: `[context]__[element]--[type]`, kebab-case, passed via the `testID` prop (based on [juntossomosmais/frontend-guideline](https://github.com/juntossomosmais/frontend-guideline)). See [CLAUDE.md](./CLAUDE.md#testid-conventions) for the full convention and examples.
+
+## Known Limitations
+
+- Verified on simulator (manual run-through of the Login → Main → Add Request → Request Detail flow) plus `pnpm lint` and `pnpm test` (typecheck passes, all tests pass).
+- Design tokens (`src/theme/`) are reasonable defaults defined in code and are not synced with real Figma variables (see [PLAN.md](./PLAN.md#7-figma) — skipped intentionally to save time).
 
 ## AI-Assisted Development
 
-ใช้ Claude Code ช่วยตลอด workflow ของโปรเจกต์นี้ ตาม role ที่กำหนดไว้ใน `.claude/agents/`:
+Claude Code was used throughout this project's workflow, following the roles defined in `.claude/agents/`:
 
-| Role        | Subagent   | หน้าที่                                                                  |
+| Role        | Subagent   | Responsibility                                                          |
 | ----------- | ---------- | ------------------------------------------------------------------------- |
-| Planner     | `ba`       | วิเคราะห์ requirement/acceptance criteria ก่อนเริ่ม implement ไม่แตะโค้ด |
-| Design      | `design`   | รีวิว/เสนอ visual direction, sync design tokens กับ Figma variables      |
-| Implementor | `frontend` | Implement screens/components/state ตาม `CLAUDE.md`                        |
-| Reviewer    | `qa`       | เช็คผลงานเทียบ acceptance criteria + testID convention + build health    |
+| Planner     | `ba`       | Clarifies requirements/acceptance criteria before implementation; no code |
+| Design      | `design`   | Reviews/proposes visual direction, syncs design tokens with Figma         |
+| Implementor | `frontend` | Implements screens/components/state per `CLAUDE.md`                       |
+| Reviewer    | `qa`       | Checks work against acceptance criteria, testID convention, build health  |
 
-Flow: `ba` (วางแผน, ไม่แตะโค้ด) → approve → `frontend` (implement + test) → `qa` (review, ไม่แก้เอง แต่ report) → เสร็จ
+**Flow:** `ba` (plan, no code) → approve → `frontend` (implement + test) → `qa` (review, reports only, no fixes) → done
 
-Custom slash commands (`.claude/commands/`): `/new-screen`, `/gen-test`, `/review-a11y`
+**Custom slash commands** (`.claude/commands/`): `/new-screen`, `/gen-test`, `/review-a11y`
 
-หลักการ: ใช้ AI scaffold โครง/boilerplate เพื่อความเร็ว แต่ logic สำคัญ (validation, reducer, business rule) ตรวจและเข้าใจเองก่อน commit ทุกครั้ง ไม่เดา business rule ที่สเปคไม่ระบุ (ดู section decisions ด้านบน) ไม่ commit โค้ดที่ยังไม่เข้าใจ 100%
+**Principles:** AI is used to scaffold boilerplate for speed, but critical logic (validation, reducers, business rules) is reviewed and understood before every commit. Business rules not covered by the spec are never guessed (see Design Decisions above). No code is committed without being fully understood.
