@@ -8,6 +8,12 @@ React Native (CLI) application for reporting internal office issues and requesti
 
 Full specification and implementation decisions are documented in [PLAN.md](./PLAN.md) and [CLAUDE.md](./CLAUDE.md).
 
+## Screenshots
+
+| Login | Main | Add Request | Request Detail |
+| --- | --- | --- | --- |
+| ![Login screen](./screenshots/login.png) | ![Main screen](./screenshots/main.png) | ![Add Request screen](./screenshots/add-request.png) | ![Request Detail screen](./screenshots/request-detail.png) |
+
 ## Tech Stack
 
 | Layer           | Choice                                            |
