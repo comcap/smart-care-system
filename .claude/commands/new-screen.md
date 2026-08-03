@@ -15,7 +15,7 @@ Then create:
    - Functional component, typed with the screen's props from `RootStackParamList`
    - No business logic inline — if the screen needs state, wire it to a Redux slice under `src/store/slices/` (create one only if it doesn't already cover this screen's data)
    - If the screen has a form, use `react-hook-form` + a Zod schema from `src/schemas/` (create the schema file if it doesn't exist — do not inline validation)
-   - Add `testID` to every interactive element per the testID Conventions section in `CLAUDE.md` (format: `$ARGUMENTS-element-variant`, lowercased/kebab-case)
+   - Add `testID` to every interactive element per the testID Conventions section in `CLAUDE.md` (BEM-inspired format: `$ARGUMENTS__element--variant`, lowercased/kebab-case)
    - Handle loading/empty/error states if the screen does anything async
 
 2. **`src/screens/$ARGUMENTS/$ARGUMENTS.styles.ts`**

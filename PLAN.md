@@ -82,20 +82,21 @@ src/
 
 ## 6. testID Convention
 
-Format: `[screen]-[element]-[variant/state]`, kebab-case, ผ่าน prop `testID`
+Format แบบ BEM-inspired: `[context]__[element]--[type]`, kebab-case, ผ่าน prop `testID`
+(อิงตาม [juntossomosmais/frontend-guideline](https://github.com/juntossomosmais/frontend-guideline))
 
 ```
-login-input-id
-login-btn-submit
-main-list
-main-btn-add
-main-input-search
-main-modal-search-error
-main-modal-btn-confirm
-add-request-input-title
-add-request-input-description
-add-request-btn-submit
-request-detail-card
+login__input--id
+login__btn--submit
+main__list
+main__btn--add
+main__input--search
+main__modal--search-error
+main__modal-btn--confirm
+add-request__input--title
+add-request__input--description
+add-request__btn--submit
+request-detail__card
 ```
 
 ## 7. Figma

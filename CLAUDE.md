@@ -109,25 +109,33 @@ Flow: `ba` (วิเคราะห์, ไม่แตะโค้ด) → app
 
 ## testID Conventions
 
-Format: `[screen]-[element]-[variant/state]` ทั้งหมดเป็น kebab-case ผ่าน prop `testID`
+Format แบบ BEM-inspired: `[context]__[element]--[type]` ผ่าน prop `testID`
+(อิงตาม [juntossomosmais/frontend-guideline](https://github.com/juntossomosmais/frontend-guideline))
 
-| Segment       | ตัวอย่าง                                                          |
-| ------------- | ----------------------------------------------------------------- |
-| Screen/scope  | `login`, `main`, `add-request`, `request-detail`                  |
-| Element       | `btn`, `input`, `list`, `card`, `error`, `empty-state`, `loading` |
-| Variant/state | `submit`, `search`, `id`, `item-{id}`                             |
+- `context` — screen/scope, kebab-case (`login`, `main`, `add-request`, `request-detail`)
+- `__` คั่นระหว่าง context กับ element (เหมือน BEM element)
+- `element` — ชนิด UI, kebab-case (`btn`, `input`, `card`, `list`, `error`, `empty-state`, `loading`)
+- `--` คั่นระหว่าง element กับ type/variant/state (เหมือน BEM modifier) — ใส่เฉพาะตอนมี variant จริง ๆ ถ้าไม่มีให้จบที่ element
+
+| Segment | ตัวอย่าง |
+| ------- | -------- |
+| context | `login`, `main`, `add-request`, `request-detail` |
+| element | `btn`, `input`, `card`, `list`, `error`, `empty-state`, `loading` |
+| type    | `submit`, `search`, `id`, `item-{id}`, `confirm` |
 
 ```
-login-input-id
-login-btn-submit
-main-list
-main-btn-add
-main-input-search
-main-error-not-found
-add-request-input-title
-add-request-input-description
-add-request-btn-submit
-request-detail-card
+login__input--id
+login__btn--submit
+main__list
+main__btn--add
+main__input--search
+main__card--item-{id}
+main__modal--search-error
+add-request__input--title
+add-request__input--description
+add-request__btn--submit
+request-detail__card
+request-detail__error
 ```
 
 **ต้องมี testID เสมอ**: ปุ่มทุกปุ่ม, form input ทุกตัว, list item, error/empty/loading state
