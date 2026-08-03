@@ -38,7 +38,7 @@ export const Login = ({ navigation }: Props) => {
     >
       <View style={styles.hero}>
         <View style={styles.heroIconBadge}>
-          <Text style={styles.heroIconGlyph}>+</Text>
+          <Text style={styles.heroIconGlyph}>❤️</Text>
         </View>
         <Text style={styles.heroTitle}>Smart Care System</Text>
         <Text style={styles.heroSubtitle}>ระบบแจ้งซ่อมบำรุง</Text>
