@@ -6,6 +6,8 @@ React Native (CLI) application for reporting internal office issues and requesti
 
 **Wireframe:** [Figma — Smart Care System](https://www.figma.com/design/zkuQlprhLXhqmrheS6StAK/Smart-Care-System)
 
+**Time spent:** ~2 days — 1 day design, 1 day implementation
+
 Full specification and implementation decisions are documented in [PLAN.md](./PLAN.md) and [CLAUDE.md](./CLAUDE.md).
 
 ## Screenshots
